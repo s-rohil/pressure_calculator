@@ -28,14 +28,14 @@ class Pressure():
             my_date=','.join((start_dt,end_dt))
 
             final_url = url+key+'/postal_codes/'+str(zipcode)+',us/history.json?'
-            final_params = {'period':'day','timestamp_between':my_date,'fields':'timestamp,mslPresAvg'}
+            final_params = {'period':'day','timestamp_between':my_date,'fields':'timestamp,tempAvg'}
             y = requests.get(url=final_url, params=final_params)
             t = requests.get(url=final_url,params=final_params)
             x= t.json()
             #print (x)
             new_list=[]
             for item in x:
-                new_list.append((item['timestamp'][:10], item['mslPresAvg']))
+                new_list.append((item['timestamp'][:10], item['tempAvg']))
 
             my_list = sorted(new_list,key=lambda k:k[1], reverse=True)
             print(my_list)
