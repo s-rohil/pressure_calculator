@@ -22,7 +22,9 @@ class Pressure():
             start_dt = datetime.datetime.now() - timedelta(days=5)
             end_dt = datetime.datetime.now() - timedelta(days=1)
             start_dt = start_dt.strftime('%Y-%m-%d')
+            print(start_dt)
             end_dt = end_dt.strftime('%Y-%m-%d')
+            print(end_dt)
             my_date=','.join((start_dt,end_dt))
 
             final_url = url+key+'/postal_codes/'+str(zipcode)+',us/history.json?'
@@ -36,7 +38,7 @@ class Pressure():
                 new_list.append((item['timestamp'][:10], item['mslPresAvg']))
 
             my_list = sorted(new_list,key=lambda k:k[1], reverse=True)
-            #print(my_list)
+            print(my_list)
             print ('Date            '+'Pressure')
             for element in my_list:
                 print('{}      {}'.format(element[0],element[1]))
@@ -56,8 +58,8 @@ class Pressure():
 if __name__=='__main__':
     parser = argparse.ArgumentParser(
         description="A script to find atmospheric pressure of a location given by zip code")
-    parser.add_argument("--echo", help='Instructions for using this tool.\n E.g - python pressure_calculator.py --zip 02120')
-    parser.add_argument("-z","--zip" ,action='store',help='Please provide a valid zip code')
+    #parser.add_argument("--echo", help='Instructions for using this tool.\n E.g - python pressure_calculator.py --zip 02120')
+    parser.add_argument("-z","--zip" ,action='store',help='Please provide a valid zip code',default='02120')
     try:
         args = parser.parse_args()
 
